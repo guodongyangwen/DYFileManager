@@ -256,8 +256,6 @@ static BOOL enableLog = NO;
     
     if([pathLastChar isEqualToString:@"/"])
     {
-        [NSException raise:@"Invalid path" format:@"file path can't have a trailing '/'."];
-        
         return NO;
     }
     
@@ -576,7 +574,6 @@ static BOOL enableLog = NO;
 
 + (BOOL)writeContent:(NSObject *)content path:(NSString *)path error:(NSError **)error{
     if (content == nil) {
-        [NSException raise:@"invalid content " format:@"content can't be nil"];
         return NO;
     }
     
@@ -612,7 +609,6 @@ static BOOL enableLog = NO;
         [NSKeyedArchiver archiveRootObject:content toFile:absolutePath];
     }
     else{
-        [NSException raise:@"invalie content type" format:@"content type %@ is not handle",NSStringFromClass([content class])];
         return NO;
     }
     return YES;
@@ -624,7 +620,7 @@ static BOOL enableLog = NO;
 
 + (void)writeContentToEnd:(NSData *)content path:(NSString *)path error:(NSError **)error {
     if (content == nil) {
-        [NSException raise:@"invalid content " format:@"content can't be nil"];
+        return;
     }
     
     NSString* absolutePath = [self absolutePath:path];
@@ -643,7 +639,7 @@ static BOOL enableLog = NO;
 
 + (void)writeContentFromStart:(NSData *)content path:(NSString *)path error:(NSError **)error {
     if (content == nil) {
-        [NSException raise:@"invalid content " format:@"content can't be nil"];
+        return;
     }
     
     NSString* absolutePath = [self absolutePath:path];
@@ -849,8 +845,6 @@ static BOOL enableLog = NO;
     
     if(indexOfSlash.location < name.length)
     {
-        [NSException raise:@"Invalid name" format:@"file name can't contain a '/'."];
-        
         return NO;
     }
     
